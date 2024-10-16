@@ -1,14 +1,16 @@
 {
-  "name": "workshop-frontend",
+  "name": "login_261workshop",
   "version": "1.0.0",
   "description": "Frontend of Web App",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "Alisha",
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2"
-  }
+  },
+  "devDependencies": {}
 }

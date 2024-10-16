@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+    <title>Login Page</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="login-container">
-        <img src="thammasat-university.jpg" alt="Thammasat University" class="university-logo">
-        <h2>Login</h2>
-        <form>
-            <label for="username">Username</label>
+        <h1>Login</h1>
+        <form id="loginForm">
+            <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
-            
-            <label for="password">Password</label>
+            <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
-            
-            <button type="submit">Submit</button>
+            <button type="button" onclick="submitLogin()">Login</button>
+            <button type="button" onclick="call_REST_API_Hello()">Hello</button>
         </form>
+        <p id="message"></p>
     </div>
+    <script src="js/script.js"></script>
 </body>
 </html>
