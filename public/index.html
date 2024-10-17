@@ -20,9 +20,11 @@
                 <option value="admin">Student</option>
                 <option value="user">Professor</option>
             </select>
-            <button type="button" onclick="callApi()">Login</button>
+            <button id="loginButton" type="button" >Login</button>
         </form>
 
+        <!-- onclick="callApi()" -->
+        <div id="message" style="color: red; margin-top: 10px;"></div>
         <div class="result" id="result"></div>
     </div>
 
