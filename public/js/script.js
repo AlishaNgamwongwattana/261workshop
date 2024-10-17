@@ -1,74 +1,31 @@
-// function submitLogin() {
-//     const username = document.getElementById('username').value;
-//     const password = document.getElementById('password').value;
-
-//     fetch('/api/auth', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({ username, password })
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         document.getElementById('message').innerText = data.message;
-//     })
-//     .catch(error => console.error('Error:', error));
-// }
-
-
-
-// function call_REST_API_Hello() {
-//     const username = document.getElementById('username').value;
-//     const password = document.getElementById('password').value;
-
-//     const url = (
-//         'http://localhost:8080/hello?' +
-//         new URLSearchParams({ myName: username, lastName: password}).toString()
-//       );
-    
-//     fetch(url)
-//     .then(response => response.text())
-//     .then(text => {
-//         document.getElementById('message').innerText = text;
-//     })
-//     .catch(error => console.error('Error:', error));
-// }
-
-
-
-
-
-
-const loginForm = document.getElementById('loginForm');
-
-    loginForm.addEventListener('submit', (event) => {
-      event.preventDefault();   
-
-
-      const formData = new FormData(loginForm);   
-
-      const requestBody = Object.fromEntries(formData);
-
-      fetch('https://your-backend-api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestBody)
-      })
-      .then(response => response.json())
-      .then(data   
- => {
-        if (data.success) {
-          // Handle successful login (e.g., redirect to dashboard)
-          window.location.href = 'dashboard.html';
-        } else {
-          // Handle login failure (e.g., display error message)
-          alert(data.message);
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    });
+function callApi() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const loginData = {};
+        loginData.UserName = username;
+        loginData.PassWord = password;
+        var jsonData = JSON.stringify(loginData);
+        //const apiUrl = 'https://restapi.tu.ac.th/api/v1/auth/Ad/verify'; 
+        fetch('https://restapi.tu.ac.th/api/v1/auth/Ad/verify2', {
+             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Application-Key': 'TUa7110a94484554d8a529ad3eb1438f4d1b07d08b86946c3b8a07faa1c56efdc7061e2be45ca8c1d6380e08f1df7d135d'
+            },
+            body: jsonData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <p><strong>Status :</strong> ${data.status ? 'Success' : 'Failed'}</p>
+                <p><strong>Name :</strong> ${data.displayname_en || 'N/A'}</p>
+                <p><strong>Username :</strong> ${data.username|| 'N/A'}</p>
+            `;
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<p>Error fetching data. Please try again.</p>';
+        });
+    }

@@ -1,47 +1,81 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-}
-
-.login-container {
-    width: 300px;
-    margin: 100px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin: 10px 0 5px;
-}
-
-input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-#message {
-    margin-top: 20px;
-    text-align: center;
-}
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', sans-serif;
+        background-color: #FDE2E4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .login-container {
+        background-color: #FFFFFF;
+        border: 2px solid #FFD3E8;
+        border-radius: 15px;
+        padding: 40px;
+        width: 350px; /* Control the container width */
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        text-align: center;
+    }
+    .login-container h1 {
+        font-size: 26px;
+        color: #555;
+        margin-bottom: 20px;
+        font-weight: 500;
+    }
+    .login-container input[type="text"],
+    .login-container input[type="password"],
+    .login-container select,
+    .login-container button {
+        width: 100%; /* Ensure all elements are 100% of container width */
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #FFB3C6;
+        border-radius: 8px;
+        font-size: 16px;
+        background-color: #FFF0F3;
+        color: #555;
+        box-sizing: border-box; /* Include padding and border in element's total width */
+    }
+    .login-container select:focus,
+    .login-container input[type="text"]:focus,
+    .login-container input[type="password"]:focus {
+        outline: none;
+        border-color: #FF99AC;
+    }
+    .login-container button {
+        background-color: #A3C4F3;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 18px;
+    }
+    .login-container button:hover {
+        background-color: #8AB6F2;
+    }
+    .footer-buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+    .footer-buttons button {
+        background-color: #FFE4F1;
+        color: #555;
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #FFD3E8;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 48%;
+    }
+    .footer-buttons button:hover {
+        background-color: #FFD9E9;
+    }
+    p {
+        color: #555;
+        font-size: 16px;
+    }
+    .result {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #555;
+    }

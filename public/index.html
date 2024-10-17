@@ -1,231 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-    <title>Login Page</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: #FDE2E4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .login-container {
-            background-color: #FFFFFF;
-            border: 2px solid #FFD3E8;
-            border-radius: 15px;
-            padding: 40px;
-            width: 350px; /* Control the container width */
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            text-align: center;
-        }
-        .login-container h1 {
-            font-size: 26px;
-            color: #555;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-        .login-container input[type="text"],
-        .login-container input[type="password"],
-        .login-container select,
-        .login-container button {
-            width: 100%; /* Ensure all elements are 100% of container width */
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #FFB3C6;
-            border-radius: 8px;
-            font-size: 16px;
-            background-color: #FFF0F3;
-            color: #555;
-            box-sizing: border-box; /* Include padding and border in element's total width */
-        }
-        .login-container select:focus,
-        .login-container input[type="text"]:focus,
-        .login-container input[type="password"]:focus {
-            outline: none;
-            border-color: #FF99AC;
-        }
-        .login-container button {
-            background-color: #A3C4F3;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 18px;
-        }
-        .login-container button:hover {
-            background-color: #8AB6F2;
-        }
-        .footer-buttons {
-            display: flex;
-            justify-content: space-between;
-        }
-        .footer-buttons button {
-            background-color: #FFE4F1;
-            color: #555;
-            padding: 8px;
-            font-size: 16px;
-            border: 1px solid #FFD3E8;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 48%;
-        }
-        .footer-buttons button:hover {
-            background-color: #FFD9E9;
-        }
-        p {
-            color: #555;
-            font-size: 16px;
-        }
-        .result {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #555;
-        }
-    </style>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+        <title>Login Page</title>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
 
-<div class="login-container">
-    <img src="img/tu-logo.png" alt="TU LOGO" width="80">
-    <h1>Login Page</h1>
-    <form id="loginForm">
-        <input type="text" id="username" placeholder="Username" required>
-        <input type="password" id= "password" placeholder="Password" required>
-        <select id="role">
-            <option value="">Select your role</option>
-            <option value="admin">Student</option>
-            <option value="user">Professor</option>
-        </select>
-        <button type="button" onclick="callApi()">Login</button>
-    </form>
-    <div class="footer-buttons">
-        <!-- <button>Logout</button> -->
+    <div class="login-container">
+        <img src="img/tu-logo.png" alt="TU LOGO" width="80">
+        <h1>Login Page</h1>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id= "password" placeholder="Password" required>
+            <select id="role">
+                <option value="">Select your role</option>
+                <option value="admin">Student</option>
+                <option value="user">Professor</option>
+            </select>
+            <button type="button" onclick="callApi()">Login</button>
+        </form>
+
+        <div class="result" id="result"></div>
     </div>
 
-    <div class="result" id="result"></div>
-</div>
-
-
-
-
-
-
-<script>
-    function callApi() {
-        const UserName = document.getElementById('username').value;
-        const PassWord = document.getElementById('password').value;
-        // const postData = {
-        //     username: username,
-        //     email: email
-        // }
-        const loginData = {};
-        loginData.UserName = UserName;
-        loginData.password = PassWord;
-        var jsonData = JSON.stringify(loginData);
-        //const apiUrl = 'https://restapi.tu.ac.th/api/v1/auth/Ad/verify'; 
-        fetch('https://restapi.tu.ac.th/api/v1/auth/Ad/verify2', {
-             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Application-Key': 'TUa7110a94484554d8a529ad3eb1438f4d1b07d08b86946c3b8a07faa1c56efdc7061e2be45ca8c1d6380e08f1df7d135d'
-            },
-            body: jsonData,
-        })
-        .then(response => response.json())
-        .then(data => {
-            const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = `
-                <p><strong>Status:</strong> ${data.status ? 'Success' : 'Failed'}</p>
-                <p><strong>Name:</strong> ${data.username || 'N/A'}</p>
-                <p><strong>Password:</strong> ${data.displayname_en || 'N/A'}</p>
-            `;
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-            const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = '<p>Error fetching data. Please try again.</p>';
-        });
-    }
-
-
-    // function callApi() {
-    //     const username = document.getElementById('username').value;
-    //     const password = document.getElementById('password').value;
-    //     const loginData = {};
-    //     loginData.username = username;
-    //     loginData.password = password;
-    //     var jsonData = JSON.stringify(loginData);
-
-    //     fetch('https://restapi.tu.ac.th/api/v1/auth/Ad/verify', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Application-Key': 'TUa7110a94484554d8a529ad3eb1438f4d1b07d08b86946c3b8a07faa1c56efdc7061e2be45ca8c1d6380e08f1df7d135d'
-    //         },
-    //         body: jsonData
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         document.getElementById('message').innerText = JSON.stringify(data);
-
-    //         const resultDiv = document.getElementById('result');
-    //         resultDiv.innerHTML = `
-    //             <p><strong>Name:</strong> ${data.username || 'N/A'}</p>
-    //             <p><strong>Password:</strong> ${data.password || 'N/A'}</p>
-    //         `;
-
-    //     })
-    //     .catch(error => console.error('Error:', error));
-
-    // }
-
-    // function callApi() {
-    //     const username = document.getElementById('username').value;
-    //     const password = document.getElementById('password').value;
-
-    //     const apiUrl = 'https://restapi.tu.ac.th/api/v1/auth/Ad/verify'; // Example
-
-    //     const postData = {
-    //         username: username,
-    //         password: password
-    //     };
-
-    //     fetch(apiUrl, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',  // Specify that we're sending JSON
-    //             'Application-Key': 'TUa7110a94484554d8a529ad3eb1438f4d1b07d08b86946c3b8a07faa1c56efdc7061e2be45ca8c1d6380e08f1df7d135d'
-    //         },
-    //         body: JSON.stringify(postData),  // Convert JS object to JSON string
-    //     })
-    //     .then(response => {
-    //         if (!response.ok) {
-    //             throw new Error('Network response was not ok');
-    //         }
-    //         return response.json();  // Parse the response as JSON
-    //     })
-    //     .then(data => {
-    //         // Display the returned username below the login button
-    //         const resultDiv = document.getElementById('result');
-    //         resultDiv.innerHTML = `
-    //          <p><strong>Status:</strong> ${data.status ? 'Success' : 'Failed'}</p>
-    //             <p><strong>Username:</strong> ${data.username || 'N/A'}</p>
-    //         `;
-    //     })
-    //     .catch(error => {
-    //         console.error('Error fetching data:', error);
-    //         const resultDiv = document.getElementById('result');
-    //         resultDiv.innerHTML = '<p>Error fetching data. Please try again.</p>';
-    //     });
-    // }
-</script>
-
-
-</body>
+    <script src="js/script.js"></script>
+    </body>
 </html>
